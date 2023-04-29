@@ -9,7 +9,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <ClerkProvider {...pageProps}>
       <Head>
         <title>Koi</title>
-        <meta name="description" content="Twitter Clone" />
+        <meta name="description" content="japanese denim" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
