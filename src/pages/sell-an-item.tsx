@@ -1,9 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { api } from "~/utils/api";
 
-const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+const SellAnItem: NextPage = () => {
   return (
     <>
       <Head>
@@ -13,11 +11,11 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gray-900">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          Main
+          <h1>Sell an item</h1>
         </div>
       </main>
     </>
   );
 };
 
-export default Home;
+export default SellAnItem;
