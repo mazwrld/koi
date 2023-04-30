@@ -1,7 +1,17 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+type SellItemForm = {
+  item_name: string;
+  description: string;
+  price: number;
+};
 
 const SellAnItem: NextPage = () => {
+  const { register, handleSubmit } = useForm<SellItemForm>();
+  const onSubmit: SubmitHandler<SellItemForm> = (data) => console.log(data);
   return (
     <>
       <Head>
@@ -12,6 +22,57 @@ const SellAnItem: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gray-900">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
           <h1>Sell an item</h1>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-6 grid gap-6 md:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="item_name"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Item name
+                </label>
+                <input
+                  id="item_name"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                  {...register("item_name", { required: true })}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="description"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Description
+                </label>
+                <input
+                  id="description"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                  {...register("description", { required: true })}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="price"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Price
+                </label>
+                <input
+                  type="number"
+                  step={"0.01"}
+                  id="price"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                  {...register("price", { required: true })}
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
+            >
+              Create
+            </button>
+          </form>
         </div>
       </main>
     </>
