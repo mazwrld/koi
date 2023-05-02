@@ -1,17 +1,23 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { api } from "../utils/api";
 
 type SellItemForm = {
-  item_name: string;
+  name: string;
   description: string;
   price: number;
 };
 
 const SellAnItem: NextPage = () => {
+  const createListing = api.listings.create.useMutation();
+
   const { register, handleSubmit } = useForm<SellItemForm>();
-  const onSubmit: SubmitHandler<SellItemForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SellItemForm> = (formData) => {
+    createListing.mutateAsync(formData);
+  };
   return (
     <>
       <Head>
@@ -34,7 +40,7 @@ const SellAnItem: NextPage = () => {
                 <input
                   id="item_name"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                  {...register("item_name", { required: true })}
+                  {...register("name", { required: true })}
                 />
               </div>
               <div>
