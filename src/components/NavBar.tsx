@@ -1,7 +1,6 @@
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import koi from "../../public/koi-logo.png";
 
 export const NavBar = () => {
   const { isLoaded: userLoaded, isSignedIn } = useUser();
@@ -11,9 +10,9 @@ export const NavBar = () => {
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <Link href="/" className="flex items-center self-center">
           <Image
-            src={koi}
+            src="/koi-logo.png"
             className="mr-3 h-8"
-            alt="Logo"
+            alt="An illustration of a koi fish as a logo"
             width={32}
             height={32}
             sizes="100vw"
