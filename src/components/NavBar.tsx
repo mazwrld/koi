@@ -33,15 +33,19 @@ export const NavBar = () => {
                 Home
               </Link>
             </li>
-            <li className="self-center">
-              <Link
-                href="/sell-an-item"
-                className="block py-2 pl-3 pr-4 md:p-0"
-                aria-current="page"
-              >
-                Sell
-              </Link>
-            </li>
+            {isSignedIn && (
+              <>
+                <li className="self-center">
+                  <Link
+                    href="/sell-an-item"
+                    className="block py-2 pl-3 pr-4 md:p-0"
+                    aria-current="page"
+                  >
+                    Sell
+                  </Link>
+                </li>
+              </>
+            )}
             {!isSignedIn && (
               <>
                 <li className="self-center">
