@@ -4,4 +4,5 @@
 
 body {
   @apply bg-[#1a1423] text-white;
+  overscroll-behavior: none;
 }

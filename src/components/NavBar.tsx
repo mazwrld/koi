@@ -8,7 +8,7 @@ export const NavBar = () => {
   return (
     <nav className="bg-[#1a34d3]">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center self-center">
           <Image
             src=""
             className="mr-3 h-8"
@@ -22,7 +22,7 @@ export const NavBar = () => {
         </Link>
         <div className="hidden w-full md:block md:w-auto">
           <ul className="mt-4 flex flex-col border p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0">
-            <li>
+            <li className="self-center">
               <Link
                 href="/"
                 className="block py-2 pl-3 pr-4 md:p-0"
@@ -31,7 +31,7 @@ export const NavBar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <li className="self-center">
               <Link
                 href="/sell-an-item"
                 className="block py-2 pl-3 pr-4 md:p-0"
@@ -42,7 +42,7 @@ export const NavBar = () => {
             </li>
             {!isSignedIn && (
               <>
-                <li>
+                <li className="self-center">
                   <SignInButton>
                     <span className="block cursor-pointer py-2 pl-3 pr-4 md:p-0">
                       Sign in
