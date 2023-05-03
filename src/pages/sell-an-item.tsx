@@ -2,21 +2,28 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { api } from "../utils/api";
 
 type SellItemForm = {
   name: string;
   description: string;
-  price: number;
+  price: string;
 };
 
 const SellAnItem: NextPage = () => {
   const createListing = api.listings.create.useMutation();
+  const router = useRouter();
 
   const { register, handleSubmit } = useForm<SellItemForm>();
   const onSubmit: SubmitHandler<SellItemForm> = (formData) => {
-    createListing.mutateAsync(formData);
+    createListing
+      .mutateAsync({
+        ...formData,
+        price: parseFloat(formData.price),
+      })
+      .then(() => router.push("/"));
   };
   return (
     <>
