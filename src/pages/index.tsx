@@ -1,14 +1,11 @@
 import { type Listing } from "@prisma/client";
-import Decimal from "decimal.js";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { api } from "~/utils/api";
 
 function Card({ listing }: { listing: Listing }) {
-  const [myDecimal] = useState(new Decimal(listing.price));
   return (
     <div className="max-w-sm rounded-lg border border-gray-700 bg-[#272132] shadow">
       <Link href="/">
@@ -22,10 +19,10 @@ function Card({ listing }: { listing: Listing }) {
         </Link>
         <p className="mb-3 font-normal text-gray-200">{listing.description}</p>
         <Link
-          href="/"
+          href={`/listings/${listing.id}`}
           className="inline-flex items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#131019] hover:bg-[#c9e209] focus:outline-none focus:ring-4"
         >
-          Buy Now - ${myDecimal.toString()}
+          View
           <svg
             aria-hidden="true"
             className="-mr-1 ml-2 h-4 w-4"
