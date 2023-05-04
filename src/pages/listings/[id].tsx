@@ -1,10 +1,31 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
 
+type MessageSellerForm = {
+  message: string;
+};
+
 const ListingView: NextPage = () => {
+  const messageSeller = api.listings.sendMessage.useMutation();
+  const { isLoaded: isSignedIn } = useUser();
   const router = useRouter();
+
+  const { register, handleSubmit, reset } = useForm<MessageSellerForm>();
+  const onSubmit: SubmitHandler<MessageSellerForm> = (formData) => {
+    messageSeller
+      .mutateAsync({
+        message: formData.message,
+        listingId: router.query.id as string,
+      })
+      .then(() => reset());
+  };
+
   const listing = api.listings.fetchListing.useQuery(
     {
       listingId: router.query.id as string,
@@ -30,22 +51,32 @@ const ListingView: NextPage = () => {
       <main className="container mx-auto mt-8 flex flex-col items-center">
         <h1 className="mb-4 text-2xl font-bold">{listing.data.name}</h1>
         <p className="mb-4 text-xl">{listing.data.description}</p>
-        <button className="inline-flex items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#131019] hover:bg-[#c9e209] focus:outline-none focus:ring-4">
-          Buy - ${listing.data.price.toString()}
-          <svg
-            aria-hidden="true"
-            className="-mr-1 ml-2 h-4 w-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </button>
+        {isSignedIn && (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-6 flex md:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="item_name"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Message
+                </label>
+                <input
+                  placeholder="I'd like to buy this item..."
+                  id="Message"
+                  className="block h-20 w-full  rounded-lg border border-transparent bg-[#47424f] p-2.5 text-sm focus:border-blue-500 active:border-blue-500"
+                  {...register("message", { required: true })}
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="inline-flex w-full items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#131019] hover:bg-[#c9e209] focus:outline-none focus:ring-4"
+            >
+              ${listing.data.price.toString()} - Message Seller
+            </button>
+          </form>
+        )}
       </main>
     </>
   );
