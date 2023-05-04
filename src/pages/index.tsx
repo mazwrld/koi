@@ -23,7 +23,7 @@ function Card({ listing }: { listing: Listing }) {
         <p className="mb-3 font-normal text-gray-200">{listing.description}</p>
         <Link
           href="/"
-          className="inline-flex items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#272132] focus:outline-none focus:ring-4"
+          className="inline-flex items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#131019] hover:bg-[#c9e209] focus:outline-none focus:ring-4"
         >
           Buy Now - ${myDecimal.toString()}
           <svg
