@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { api } from "~/utils/api";
 
+
 function Card({ listing }: { listing: Listing }) {
   return (
     <div className="max-w-sm rounded-lg border border-gray-700 bg-[#272132] shadow">
