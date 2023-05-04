@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 function Card({ listing }: { listing: Listing }) {
   const [myDecimal] = useState(new Decimal(listing.price));
   return (
-    <div className="max-w-sm  rounded-lg border border-gray-700 bg-[#272132] shadow">
+    <div className="max-w-sm rounded-lg border border-gray-700 bg-[#272132] shadow">
       <Link href="/">
         <Image className="rounded-t-lg" src="" alt="" />
       </Link>
@@ -55,8 +55,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-center">
-        <p className="mt-3 text-2xl">Items for sale!</p>
-        <div className="container flex flex-row flex-wrap items-center justify-center gap-3 px-4 py-16">
+        <h1 className="mt-3 text-2xl">Items for sale!</h1>
+        <div className="container grid grid-cols-3 items-center justify-center gap-4 px-4 py-16">
           {listings.data?.map((listing) => (
             <Card key={listing.id} listing={listing} />
           ))}
