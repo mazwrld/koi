@@ -1,11 +1,14 @@
 import { type Listing } from "@prisma/client";
+import Decimal from "decimal.js";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { api } from "~/utils/api";
 
 function Card({ listing }: { listing: Listing }) {
+  const [myDecimal] = useState(new Decimal(listing.price));
   return (
     <div className="max-w-sm rounded-lg border border-gray-700 bg-[#272132] shadow">
       <Link href="/">
@@ -22,7 +25,7 @@ function Card({ listing }: { listing: Listing }) {
           href="/"
           className="inline-flex items-center rounded-lg bg-[#e4ff1b] px-3 py-2 text-center text-sm font-medium text-[#272132] focus:outline-none focus:ring-4"
         >
-          Buy Now - ${listing.price}
+          Buy Now - ${myDecimal.toString()}
           <svg
             aria-hidden="true"
             className="-mr-1 ml-2 h-4 w-4"
@@ -52,8 +55,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-center">
-        <p className="mt-3 text-2xl">Items for sale!</p>
-        <div className="container flex flex-row flex-wrap items-center justify-center gap-3 px-4 py-16">
+        <h1 className="mt-3 text-2xl">Items for sale!</h1>
+        <div className="container grid grid-cols-3 items-center justify-center gap-4 px-4 py-16">
           {listings.data?.map((listing) => (
             <Card key={listing.id} listing={listing} />
           ))}
