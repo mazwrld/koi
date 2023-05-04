@@ -11,7 +11,10 @@ const ListingView: NextPage = () => {
     },
     { enabled: !!router.query.id }
   );
-  if (!listing.data) return;
+
+  if (!listing.data) {
+    return <div>Unable to find the listing...</div>;
+  }
   return (
     <>
       <Head>
