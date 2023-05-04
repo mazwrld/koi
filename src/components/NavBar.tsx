@@ -15,9 +15,6 @@ export const NavBar = () => {
             alt="An illustration of a koi fish as a logo"
             width={32}
             height={32}
-            blurDataURL="/koi-logo.png"
-            loading="eager"
-            sizes="100vw"
           />
           <span className="self-center whitespace-nowrap text-2xl font-semibold">
             Koi
