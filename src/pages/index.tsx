@@ -10,7 +10,6 @@ import { api } from "~/utils/api";
 function Card({ listing }: { listing: Listing }) {
   const [myDecimal] = useState(new Decimal(listing.price));
   return (
-    // all the cards should have the same height
     <div className="max-w-sm  rounded-lg border border-gray-700 bg-[#272132] shadow">
       <Link href="/">
         <Image className="rounded-t-lg" src="" alt="" />
