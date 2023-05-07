@@ -1,6 +1,8 @@
 # Koi
 
-![Koi Logo](public/koi-logo.png)
+<p align="center">
+  <img src="public/koi-logo.png" alt="Koi Logo" width="200" height="200">
+</p>
 
 Koi is a simple T3 project that an online store that people can use to buy and sell items.
 
