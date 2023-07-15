@@ -2,7 +2,7 @@ import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-export const NavBar = () => {
+function Navbar() {
   const { isLoaded: userLoaded, isSignedIn } = useUser();
   if (!userLoaded) return <div />;
   return (
@@ -63,4 +63,6 @@ export const NavBar = () => {
       </div>
     </nav>
   );
-};
+}
+
+export default Navbar;

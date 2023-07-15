@@ -2,7 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import { type AppType } from "next/app";
 import Head from "next/head";
-import { NavBar } from "~/components/NavBar";
+import NavBar from "~/components/NavBar";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 
